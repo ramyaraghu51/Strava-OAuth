@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    
+    <meta charset="utf-8" />
+    <link rel="icon" href="https://glitch.com/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<!--     <title>{{seo.title}}</title> -->
+    
+    <!-- Meta tags for SEO and social sharing -->
+    <link rel="canonical" href="{{seo.url}}">
+    <meta name="description" content="{{seo.description}}">
+    <meta property="og:title" content="{{seo.title}}">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="{{seo.url}}">
+    <meta property="og:description" content="{{seo.description}}">
+    <meta property="og:image" content="{{seo.image}}">
+    <!-- Import the webpage's stylesheet -->
+    <link rel="stylesheet" href="/style.css" />
+
+    <!-- This is a handlebars IF statement
+         Checking for a custom "color" parameter from server.js -->
+    {{#if color}} 
+    <!-- If there is a color value, update the style for the page title -->
+    <style>
+      .title {
+        color: {{color}};
+      }
+    </style>
+    {{/if}}    
+  </head>
+  <body>
+    <div class="wrapper">
+        
+        <div class="content">
+          <p>
+            Daily Steps Tracker App  
+          </p>
+          <br>
+         <a href="https://www.strava.com/oauth/authorize?client_id=68227&response_type=code&redirect_uri=https://tricky-potent-peach.glitch.me/callback&scope=read,activity:read_all,activity:write"> Login with Strava </a>
+          <br>
+          <a href="https://www.steptracker.org"> Login with Fitbit </a>
+        </div>
+      
+        
+        <div class="illo-container">
+           <img src="https://cdn.glitch.com/ba32e939-280f-436b-8374-7c7394419c14%2Fwcf.png?v=1626905707469" class="illustration" alt="Node logo" /> 
+        </div>
+        
+    </div>
+
+  </body>
+</html>

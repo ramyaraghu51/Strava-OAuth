@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+     <link rel="stylesheet" href="/calendar.css" />
+     <link rel="stylesheet" href="/style.css" />
+
+
+  </head>
+  <body>
+    <div>
+     <p>
+       Daily Steps 
+      </p>  
+    </div>
+    
+    <div id="app"></div>
+    <script type="module" id="calenderdata" src="/bundle.js" data-steps = "{{dailysteps}}" >
+    </script>
+    
+    <script>
+      //console.log('ho');
+      
+      window.addEventListener("load", function() {
+        document.getElementById('form').addEventListener("submit", function(e) {
+          e.preventDefault(); // before the code
+          /* do what you want with the form */
+
+        var  form = document.getElementById('form')
+        const formData = new FormData(form)
+        const plainFormData = Object.fromEntries(formData.entries())
+        const jsondata = JSON.stringify(plainFormData)
+
+        fetch('https://www.strava.com/api/v3/activities', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': "Bearer {{access_token}}",
+          },
+          body: jsondata,
+          }).then(response => {
+              if(response.status>=200 && response.status<=299 ) 
+                {
+                  alert("Your data was successfully sent to strava")
+                }
+               else if(response.status>=400 && response.status<=499 ) 
+                {
+                  alert("Bad Request! Network response was not ok")
+                }
+              else
+                {
+                  alert("Server Error")
+        
+                }
+              if (!response.ok) {
+                throw new Error('Network response was not ok.')
+              }
+            }).catch(console.error)
+          // Should be triggered on form submit
+          // console.log('hi');
+        })
+      });
+      function exportJson(el, steps) {
+
+        var data = "text/json;charset=utf-8," + 
+            encodeURIComponent(JSON.stringify(steps));
+        // what to return in order to show download window?
+        
+        el.setAttribute("href", "data:"+data);
+        el.setAttribute("download", "data.json");    
+    }
+    
+    </script>
+
+    <div class="wrapper" >
+      <form id="form">
+        <p>
+          Add a new activity to strava: 
+        </p>
+        <label for="name">Name of Activity:</label>
+        <input type="text" id="name" name="name"><br>
+
+        <label for="type">Type of Activity:</label>
+        <input type="text" id="type" name="type"><br>
+
+        <label for="date">Date</label>
+<!--         <span id='date-time'></span> -->
+        <input type="datetime-local" id="start_date_local" name="start_date_local"><br>
+
+        <label for="time">Elapsed time:</label>
+        <input type="text" id="time" name="elapsed_time"><br>
+
+        <label for="desc">Description: </label>
+        <input type="text" id="desc" name="desc"><br>
+
+        <label> Trainer</label>
+        <input type="radio" name="exercise_type" value="Trainer" checked><br>
+        <label> Commute</label>
+        <input type="radio" name="exercise_type" value="Commute"><br>
+       
+
+
+        <label for="distance">Distance:</label>
+        <input type="text" id="distance" name="distance"><br>
+        <br>  
+
+        <button type="submit">Update Data</button>
+        <p>Click the "Update Data" button and the form-data will be sent strava.</p>
+      <a id="exportJSON" onclick="exportJson(this, {{successful_steps}} );" class="btn"><i class="icon-download"></i> Get Monthly Report</a>
+      </form>
+
+    </div>
+  </body>
+<!--   <script>
+    window.addEventListener('load', () => {
+      const now = new Date();
+      now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+      document.getElementById('start_date_local').value = now.toISOString().slice(0, -1);
+    });
+  </script> -->
+</html>
+
