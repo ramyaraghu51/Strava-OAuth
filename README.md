@@ -6,8 +6,10 @@ This project includes a Node.js server script and a web page that connects to it
 
 ## How to run this project?
 Download the folder to the desired IDE.
-  Run npm install in the command prompt to install the necessary packages.
-  Run npm run start to view the application locally.
+  Run `npm install` in the command prompt to install the necessary packages.
+  
+  Run `npm run start` to view the application locally.
+  
   A running example of this project can be found at https://tricky-potent-peach.glitch.me/
 
 
