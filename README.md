@@ -30,4 +30,5 @@ Download the folder to the desired IDE.
 
 ← callback.hbs
 
-
+How to further develop the project?
+Our application is functional only when the user is logged in. Currently there is not a database setup to store the User_id, access_token,refresh_token pair. In the server.js file, we can define a backend url and post the user_id,access_token and refresh token pair so that it gets stored in the database. With such a set up in place, we will be able to make our backend url request the strava application once a day and store the user's activites in the database. This way, even when the users are not logged in , we can still trigger this function ans store the activties. Then it will be possible to generate a report that has the user_id and a boolean value that says whether they  have done ore than 7000 steps.
